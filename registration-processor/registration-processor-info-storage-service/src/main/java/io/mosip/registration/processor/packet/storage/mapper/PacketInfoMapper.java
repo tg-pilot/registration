@@ -181,6 +181,7 @@ public class PacketInfoMapper {
 
 			if (demoDto.getDateOfBirth() != null) {
 				try {
+					System.out.println(dobFormat);
 					Date date = new SimpleDateFormat(dobFormat).parse(demoDto.getDateOfBirth());
 
 					entity.setDob(getHMACHashCode(demoDto.getDateOfBirth()));
