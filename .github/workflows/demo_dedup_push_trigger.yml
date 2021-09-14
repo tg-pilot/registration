@@ -1,4 +1,4 @@
-name: OSI Validator Maven Package upon a push
+name: Demo De-Duplication Maven Package upon a push
 
 on: workflow_dispatch
 
@@ -41,7 +41,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          cd registration-processor/pre-processor/registration-processor-osi-validator-stage
+          cd registration-processor/core-processor/registration-processor-demo-dedupe-stage
           mvn -B package -s $GITHUB_WORKSPACE/settings.xml -DskipTests -Dgpg.skip=true --file pom.xml
       - name: Ready the springboot artifacts
         run: find -name '*.jar' -executable -type f  -exec zip release.zip {} +
@@ -53,14 +53,14 @@ jobs:
           name: release
           path: ./release.zip
 
-  docker-registration-processor-osi-validator-stage:
+  docker-registration-processor-demo-dedupe-stage:
     needs: build
 
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.dev_namespace_docker_hub }}
-      SERVICE_NAME: registration-processor-osi-validator-stage
-      SERVICE_LOCATION: registration-processor/pre-processor/registration-processor-osi-validator-stage
+      SERVICE_NAME: registration-processor-demo-dedupe-stage
+      SERVICE_LOCATION: registration-processor/core-processor/registration-processor-demo-dedupe-stage
 
     steps:
       - uses: actions/checkout@v2
@@ -73,6 +73,7 @@ jobs:
         run: |
           # Strip git ref prefix from version
           echo "BRANCH_NAME=$(echo ${{ github.ref }} | sed -e 's,.*/\(.*\),\1,')" >> $GITHUB_ENV
+
       - name: Get version info from pom
         id: getPomVersion
         uses: mavrosxristoforos/get-xml-info@1.0
@@ -80,7 +81,7 @@ jobs:
           xml-file: ./${{ env.SERVICE_LOCATION }}/pom.xml
           xpath: /*[local-name()="project"]/*[local-name()="version"]
 
-      - name: Unzip and extract the registration-processor-osi-validator-stage
+      - name: Unzip and extract the ${{ env.SERVICE_NAME }}
         run: unzip -uj "release.zip" "${{ env.SERVICE_LOCATION }}/target/*" -d "./${{ env.SERVICE_LOCATION }}/target"
 
       - name: Build image
