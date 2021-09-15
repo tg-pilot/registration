@@ -41,7 +41,8 @@ import io.mosip.registration.processor.packet.storage.entity.RegBioRefPKEntity;
 import io.mosip.registration.processor.packet.storage.entity.RegDemoDedupeListEntity;
 import io.mosip.registration.processor.packet.storage.entity.RegDemoDedupeListPKEntity;
 import io.mosip.registration.processor.packet.storage.exception.DateParseException;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 /**
  * The Class PacketInfoMapper.
@@ -57,8 +58,8 @@ public class PacketInfoMapper {
 	/** The Constant PRE_REGISTRATION_ID. */
 	private static final String PRE_REGISTRATION_ID = "preRegistrationId";
 
-	@Value("${registration.processor.applicant.dob.format}")
-	private static String dobFormat;
+	@Autowired
+	private static Environment env;
 
 	/**
 	 * Instantiates a new packet info mapper.
@@ -181,8 +182,8 @@ public class PacketInfoMapper {
 
 			if (demoDto.getDateOfBirth() != null) {
 				try {
-					System.out.println(dobFormat);
-					Date date = new SimpleDateFormat(dobFormat).parse(demoDto.getDateOfBirth());
+					System.out.println(env.getProperty("registration.processor.applicant.dob.format"));
+					Date date = new SimpleDateFormat(env.getProperty("registration.processor.applicant.dob.format")).parse(demoDto.getDateOfBirth());
 
 					entity.setDob(getHMACHashCode(demoDto.getDateOfBirth()));
 				} catch (ParseException e) {
