@@ -182,6 +182,8 @@ public class PacketInfoMapper {
 
 			if (demoDto.getDateOfBirth() != null) {
 				try {
+					regProcLogger.debug(LoggerFileConstant.SESSIONID.toString(), LoggerFileConstant.USERID.toString(), regId,
+							"PacketInfoMapper" + env.getProperty("registration.processor.applicant.dob.format"));
 					System.out.println(env.getProperty("registration.processor.applicant.dob.format"));
 					Date date = new SimpleDateFormat(env.getProperty("registration.processor.applicant.dob.format")).parse(demoDto.getDateOfBirth());
 
