@@ -39,7 +39,7 @@ COMMENT ON COLUMN regprc.print_transaction.print_id IS 'ID: Primary key of print
 -- ddl-end --
 COMMENT ON COLUMN regprc.print_transaction.credential_transaction_id IS 'Description : Credential Transaction Unique Id mosip_credential(credential_transaction)';
 -- ddl-end --
-COMMENT ON COLUMN regprc.print_transaction.ref_id IS 'Description : Registration Id (RID)';
+COMMENT ON COLUMN regprc.print_transaction.reg_id IS 'Description : Registration Id (RID)';
 -- ddl-end --
 COMMENT ON COLUMN regprc.print_transaction.status_code IS 'Description : Status Code for Printing';
 -- ddl-end --
