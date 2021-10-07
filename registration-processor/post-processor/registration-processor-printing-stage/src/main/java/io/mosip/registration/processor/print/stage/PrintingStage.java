@@ -200,6 +200,7 @@ public class PrintingStage extends MosipVerticleAPIManager {
 			else {
 			String vid = getVid(uin);
 			CredentialRequestDto credentialRequestDto = getCredentialRequestDto(vid);
+			credentialRequestDto.setAdditionalData(new LinkedHashMap<>());
 			credentialRequestDto.getAdditionalData().put("registrationId", regId);
 			requestWrapper.setId(env.getProperty("mosip.registration.processor.credential.request.service.id"));
 			requestWrapper.setRequest(credentialRequestDto);
