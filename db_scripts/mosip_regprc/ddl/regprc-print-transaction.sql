@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS regprc.print_transaction (
     status_code character varying(36) NOT NULL,
     status_comment character varying(256),
     lang_code character varying(3) NOT NULL,
+    read_dtimes timestamp,
+    print_dtimes timestamp,
     cr_by character varying(256) NOT NULL,
     cr_dtimes timestamp NOT NULL,
     upd_by character varying(256),
@@ -44,6 +46,10 @@ COMMENT ON COLUMN regprc.print_transaction.status_code IS 'Description : Status 
 COMMENT ON COLUMN regprc.print_transaction.status_comment IS 'Description : Detailed Status Comment';
 -- ddl-end --
 COMMENT ON COLUMN regprc.print_transaction.lang_code IS 'Language Code : For multilanguage implementation this attribute Refers master.language.code. The value of some of the attributes in current record is stored in this respective language.';
+-- ddl-end --
+COMMENT ON COLUMN regprc.print_transaction.read_dtimes IS 'Read DateTimestamp : Date and Timestamp when listener read message from ActiveMQ.';
+-- ddl-end --
+COMMENT ON COLUMN regprc.print_transaction.print_dtimes IS 'Print DateTimestamp : Date and Timestamp when listener print the pdf.';
 -- ddl-end --
 COMMENT ON COLUMN regprc.print_transaction.cr_by IS 'Created By : ID or name of the user who create / insert record.';
 -- ddl-end --
