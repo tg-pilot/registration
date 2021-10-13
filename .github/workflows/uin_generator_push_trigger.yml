@@ -1,4 +1,4 @@
-name: Demo De-Duplication Maven Package upon a push
+name: RegProc UIN Generator Maven Package upon a push
 
 
 on: workflow_dispatch
