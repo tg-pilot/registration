@@ -55,14 +55,14 @@ jobs:
           name: release
           path: ./release.zip
 
-  docker-registration-processor-demo-dedupe-stage:
+  docker-registration-processor-uin-generator-stage:
     needs: build
 
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.dev_namespace_docker_hub }}
-      SERVICE_NAME: registration-processor-demo-dedupe-stage
-      SERVICE_LOCATION: registration-processor/core-processor/registration-processor-demo-dedupe-stage
+      SERVICE_NAME: registration-processor-uin-generator-stage
+      SERVICE_LOCATION: registration-processor/core-processor/registration-processor-uin-generator-stage
 
     steps:
       - uses: actions/checkout@v2
